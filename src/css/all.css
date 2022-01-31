@@ -1,0 +1,136 @@
+:root {
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-top: 3rem;
+}
+
+.main {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem 1rem;
+  width: 90vw;
+  position: relative;
+}
+.correct-answers-block,
+.wrong-answers-block {
+  position: absolute;
+  z-index: 999;
+  width: 95%;
+  height: 37vh;
+}
+.correct-answers-block img,
+.wrong-answers-block img {
+  width: 80%;
+  margin-top: 3rem;
+  margin-left: 2.5rem;
+}
+.block-header {
+  display: flex;
+  justify-content: space-between;
+}
+.block-timer {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 1.2rem;
+}
+.block-timer .material-icons {
+  margin-right: 5px;
+}
+.seconds {
+  font-weight: bold;
+}
+
+.title {
+  color: white;
+}
+.subtitle {
+  color: rgb(87, 100, 145);
+}
+.article-option {
+  border: 2px solid gainsboro;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  color: rgb(154, 157, 172);
+  position: relative;
+}
+.article-option-over {
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+}
+
+.letter {
+  font-weight: bold;
+}
+.article-option > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.country-name {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+.btn-next {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-next button {
+  background-color: orange;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  color: white;
+}
+.btn-next button:hover {
+  cursor: pointer;
+}
+.wrong-answer {
+  background-color: rgb(234, 130, 130);
+  color: white;
+}
+.correct-answer {
+  background-color: rgb(96, 191, 136);
+  color: white;
+}
+.hide {
+  visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .body {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .main {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .body {
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .main {
+    width: 100%;
+  }
+}
