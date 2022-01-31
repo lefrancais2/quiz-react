@@ -8,7 +8,7 @@ const GameProvider = ({ children }) => {
   const answers = [];
   const questions = [];
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 8; i++) {
     questions.push(selectNumbers(countries.length));
     answers.push(Math.floor(Math.random() * 4));
   }
@@ -17,11 +17,9 @@ const GameProvider = ({ children }) => {
 
   const [count, setCount] = useState(0);
   const [disableBtn, setDisableBtn] = useState(false);
-  //   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    console.log("count,count", count);
-    if (count === 3) {
+    if (count === 7) {
       setDisableBtn(true);
     }
     return () => {};
@@ -34,8 +32,6 @@ const GameProvider = ({ children }) => {
     setCount,
     count,
     disableBtn,
-    // score,
-    // setScore,
   };
 
   return <GameContext.Provider value={data}>{children}</GameContext.Provider>;

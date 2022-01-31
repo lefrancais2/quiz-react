@@ -20,3 +20,17 @@ export const removeHide = () => {
     $elements[i].classList.remove("hide");
   }
 };
+
+export const removeArticleClass = () => {
+  let $elements = document.querySelectorAll(".article-option");
+  for (let i = 0; i < $elements.length; i++) {
+    $elements[i].classList.remove("article");
+  }
+};
+
+export const addArticleClass = () => {
+  let $elements = document.querySelectorAll(".article-option");
+  for (let i = 0; i < $elements.length; i++) {
+    $elements[i].classList.add("article");
+  }
+};

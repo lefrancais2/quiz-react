@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import GameContext from "../context/GameContext";
 import { countries } from "../data/countries";
-import { addHide, answerCorrect } from "../helpers/inputElement";
-import bad from "../assets/incorrecto.gif";
-import good from "../assets/congrats.png";
+import {
+  addArticleClass,
+  addHide,
+  answerCorrect,
+  removeArticleClass,
+} from "../helpers/inputElement";
+import InfoGame from "./InfoGame";
+
 import Option from "./Option";
 
-let initialSecond = 5;
+let initialSecond = 15;
 
 const Game = () => {
   const { questions, answers, setCount, count, disableBtn } =
@@ -14,8 +19,17 @@ const Game = () => {
 
   const [selectAnswer, setSelectAnswer] = useState(false);
   const [myIndex, setMyIndex] = useState(null);
+  const [score, setScore] = useState(0);
 
   const $timer = useRef();
+  const $infoGame = useRef();
+  const $questionGame = useRef();
+
+  // ///////////////////////////
+  // countries.filter((el, index) => {
+  //   el.region === "Asia" ? console.log("index", el.name) : console.log("");
+  // });
+  // ///////////////////////////
 
   let sec = initialSecond;
   useEffect(() => {
@@ -34,10 +48,14 @@ const Game = () => {
 
     if (selectAnswer) {
       clearInterval(countDown);
-      if (myIndex !== answers[count]) {
+      if (myIndex !== answers[count])
         answerCorrect(".article-option", answers, count);
-      }
+
+      if (myIndex === answers[count]) setScore(score + 1);
+
       sec = initialSecond;
+
+      removeArticleClass();
     }
 
     return () => clearInterval(countDown);
@@ -45,13 +63,19 @@ const Game = () => {
 
   const handleBtn = (e) => {
     e.preventDefault();
-    if (disableBtn) return;
+
+    if (disableBtn) {
+      $questionGame.current.classList.add("none");
+      $infoGame.current.classList.remove("none");
+      return;
+    }
     if (!selectAnswer) return;
+
     setCount(count + 1);
-    // console.log("count", count);
     setSelectAnswer(false);
 
     addHide();
+    addArticleClass();
 
     let $elements = document.querySelectorAll(".article-option");
     for (let i = 0; i < $elements.length; i++) {
@@ -66,6 +90,9 @@ const Game = () => {
         <aside className="block-header">
           <h1 className="title">COUNTRY QUIZ</h1>
           <div>
+            <p className="count-game">{count + 1}/8</p>
+          </div>
+          <div>
             <p className="block-timer">
               <span className="material-icons">alarm</span>
               <span ref={$timer} className="seconds"></span>
@@ -73,39 +100,41 @@ const Game = () => {
           </div>
         </aside>
         <section className="main">
-          <div>
-            <h3 className="subtitle">
-              {countries[questions[count][answers[count]]].capital} es la
-              capital de...
-            </h3>
-          </div>
+          <section ref={$questionGame} className="game">
+            <div>
+              <h3 className="subtitle">
+                {countries[questions[count][answers[count]]].capital} es la
+                capital de...
+              </h3>
+            </div>
 
-          <section>
-            {questions[count].map((el, index) =>
-              index === answers[count] ? (
-                <Option
-                  key={index}
-                  //   check="check_circle"
-                  name={countries[el].translations.es}
-                  index={index}
-                  setSelectAnswer={setSelectAnswer}
-                  setMyIndex={setMyIndex}
-                />
-              ) : (
-                <Option
-                  key={index}
-                  //   check="cancel"
-                  name={countries[el].translations.es}
-                  index={index}
-                  setSelectAnswer={setSelectAnswer}
-                  setMyIndex={setMyIndex}
-                />
-              )
-            )}
+            <section>
+              {questions[count].map((el, index) =>
+                index === answers[count] ? (
+                  <Option
+                    key={index}
+                    name={countries[el].translations.es}
+                    index={index}
+                    setSelectAnswer={setSelectAnswer}
+                    setMyIndex={setMyIndex}
+                  />
+                ) : (
+                  <Option
+                    key={index}
+                    name={countries[el].translations.es}
+                    index={index}
+                    setSelectAnswer={setSelectAnswer}
+                    setMyIndex={setMyIndex}
+                  />
+                )
+              )}
+            </section>
+            <section className="btn-next">
+              <button onClick={handleBtn}>Next</button>
+            </section>
           </section>
-          <section className="btn-next">
-            <button onClick={handleBtn}>Next</button>
-          </section>
+
+          <InfoGame score={score} infoGame={$infoGame} />
         </section>
       </section>
     </div>

@@ -50,6 +50,11 @@ body {
 .block-timer .material-icons {
   margin-right: 5px;
 }
+.count-game {
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+}
 .seconds {
   font-weight: bold;
 }
@@ -70,6 +75,11 @@ body {
   position: relative;
 }
 .article-option-over {
+  background-color: orange;
+  color: white;
+  cursor: pointer;
+}
+.article:hover {
   background-color: orange;
   color: white;
   cursor: pointer;
@@ -111,6 +121,48 @@ body {
 }
 .hide {
   visibility: hidden;
+}
+
+.none {
+  display: none;
+}
+
+.info-game {
+  height: 60vh;
+}
+.image figure {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.image img {
+  width: 100%;
+}
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(29, 53, 93);
+}
+.results h3 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.results p {
+  font-weight: bold;
+}
+.results p span {
+  color: rgb(111, 207, 151);
+  font-size: 2rem;
+}
+.results button {
+  background-color: transparent;
+  border: none;
+  border: 1px solid rgb(29, 53, 93);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
