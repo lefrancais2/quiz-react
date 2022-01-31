@@ -7,10 +7,6 @@ export const answerCorrect = (clase, answers, count) => {
   $el.innerHTML = `<span class="material-icons">check_circle</span>`;
 };
 
-export const wrongAnswer = (index) => {
-  let $elements = document.querySelectorAll("");
-};
-
 export const addHide = () => {
   let $elements = document.querySelectorAll(".right-answer");
   for (let i = 0; i < $elements.length; i++) {

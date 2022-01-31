@@ -6,10 +6,11 @@ import bad from "../assets/incorrecto.gif";
 import good from "../assets/congrats.png";
 import Option from "./Option";
 
-let initialSecond = 30;
+let initialSecond = 5;
 
 const Game = () => {
-  const { questions, answers, setCount, count } = useContext(GameContext);
+  const { questions, answers, setCount, count, disableBtn } =
+    useContext(GameContext);
 
   const [selectAnswer, setSelectAnswer] = useState(false);
   const [myIndex, setMyIndex] = useState(null);
@@ -27,12 +28,15 @@ const Game = () => {
         clearInterval(countDown);
         answerCorrect(".article-option", answers, count);
         sec = initialSecond;
+        setSelectAnswer(true); //
       }
     }, 1000);
 
     if (selectAnswer) {
       clearInterval(countDown);
-      answerCorrect(".article-option", answers, count);
+      if (myIndex !== answers[count]) {
+        answerCorrect(".article-option", answers, count);
+      }
       sec = initialSecond;
     }
 
@@ -41,9 +45,10 @@ const Game = () => {
 
   const handleBtn = (e) => {
     e.preventDefault();
+    if (disableBtn) return;
     if (!selectAnswer) return;
     setCount(count + 1);
-    console.log("count", count);
+    // console.log("count", count);
     setSelectAnswer(false);
 
     addHide();
@@ -80,7 +85,7 @@ const Game = () => {
               index === answers[count] ? (
                 <Option
                   key={index}
-                  check="check_circle"
+                  //   check="check_circle"
                   name={countries[el].translations.es}
                   index={index}
                   setSelectAnswer={setSelectAnswer}
@@ -89,7 +94,7 @@ const Game = () => {
               ) : (
                 <Option
                   key={index}
-                  check="cancel"
+                  //   check="cancel"
                   name={countries[el].translations.es}
                   index={index}
                   setSelectAnswer={setSelectAnswer}

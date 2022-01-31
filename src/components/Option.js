@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import GameContext from "../context/GameContext";
 
-const Option = ({ check, name, index, setSelectAnswer, setMyIndex }) => {
+// const Option = ({ check, name, index, setSelectAnswer, setMyIndex }) => {
+const Option = ({ name, index, setSelectAnswer, setMyIndex }) => {
   const $select = useRef();
   const $article = useRef();
   const $rightAnswer = useRef();
@@ -29,8 +30,10 @@ const Option = ({ check, name, index, setSelectAnswer, setMyIndex }) => {
 
     if (index === answers[count]) {
       $article.current.classList.add("correct-answer");
+      $rightAnswer.current.innerHTML = `<span class="material-icons">check_circle</span>`;
     } else {
       $article.current.classList.add("wrong-answer");
+      $rightAnswer.current.innerHTML = `<span class="material-icons">cancel</span>`;
     }
 
     $rightAnswer.current.classList.remove("hide");
@@ -64,8 +67,8 @@ const Option = ({ check, name, index, setSelectAnswer, setMyIndex }) => {
         {/* <div className="right-answer">
           {go && <span className="material-icons">{check}</span>}
         </div> */}
-        <div ref={$rightAnswer} className="right-answer hide">
-          <span className="material-icons">{check}</span>
+        <div ref={$rightAnswer} className="right-answer">
+          {/* <span className="material-icons">{check}</span> */}
         </div>
       </div>
     </article>
