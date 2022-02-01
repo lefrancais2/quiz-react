@@ -12,11 +12,11 @@ const InfoGame = ({ score, infoGame }) => {
       <div className="image">
         <figure>
           {score <= 2 ? (
-            <img src={wrong} alt="" />
-          ) : score <= 5 ? (
-            <img src={notBad} />
-          ) : score >= 6 ? (
-            <img src={win} />
+            <img src={wrong} alt="wrong_answer" />
+          ) : score <= 7 ? (
+            <img src={notBad} alt="not_bad" />
+          ) : score >= 8 ? (
+            <img src={win} alt="you_win" />
           ) : (
             <img src="" alt="No se pudo cargar la imagen" />
           )}
@@ -25,7 +25,7 @@ const InfoGame = ({ score, infoGame }) => {
       <div className="results">
         <h3>Results</h3>
         <p>
-          you got <span>{score}</span> correct answer{" "}
+          You got <span>{score}</span> correct answer{" "}
         </p>
         <div>
           <button onClick={handleAgain}>try again</button>

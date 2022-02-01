@@ -10,11 +10,15 @@ import {
 import InfoGame from "./InfoGame";
 
 import Option from "./Option";
+import Subtitle from "./Subtitle";
 
 let initialSecond = 15;
 
 const Game = () => {
-  const { questions, answers, setCount, count, disableBtn } =
+  console.log("viendo", countries[98]);
+  console.log("viendo", countries[33]);
+  console.log("viendo", countries[0]);
+  const { questions, answers, setCount, count, disableBtn, whatRegions } =
     useContext(GameContext);
 
   const [selectAnswer, setSelectAnswer] = useState(false);
@@ -24,12 +28,6 @@ const Game = () => {
   const $timer = useRef();
   const $infoGame = useRef();
   const $questionGame = useRef();
-
-  // ///////////////////////////
-  // countries.filter((el, index) => {
-  //   el.region === "Asia" ? console.log("index", el.name) : console.log("");
-  // });
-  // ///////////////////////////
 
   let sec = initialSecond;
   useEffect(() => {
@@ -90,7 +88,7 @@ const Game = () => {
         <aside className="block-header">
           <h1 className="title">COUNTRY QUIZ</h1>
           <div>
-            <p className="count-game">{count + 1}/8</p>
+            <p className="count-game">{count + 1}/16</p>
           </div>
           <div>
             <p className="block-timer">
@@ -102,10 +100,26 @@ const Game = () => {
         <section className="main">
           <section ref={$questionGame} className="game">
             <div>
-              <h3 className="subtitle">
-                {countries[questions[count][answers[count]]].capital} es la
-                capital de...
-              </h3>
+              {count <= 7 && (
+                <Subtitle
+                  title={`${
+                    countries[questions[count][answers[count]]].capital
+                  } es la capital de...`}
+                  flag={false}
+                />
+              )}
+              {count > 7 && count < 12 && (
+                <Subtitle
+                  title={`¿Qué país es de ${whatRegions[count - 8]}?`}
+                  flag={false}
+                />
+              )}
+              {count > 11 && (
+                <Subtitle
+                  title={`¿A qué país pertenece esta bandera?`}
+                  flag={countries[questions[count][answers[count]]].flags.svg}
+                />
+              )}
             </div>
 
             <section>
